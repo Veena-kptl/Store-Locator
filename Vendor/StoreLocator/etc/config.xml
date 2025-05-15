@@ -4,7 +4,7 @@
         <storelocator>
             <general>
 				<enabled>0</enabled>
-                <api_key>AIzaSyDV3PUQvydx-bapv7Zk1Fbd7_FmScFT430</api_key>
+                <api_key></api_key>
 				<api_url>https://maps.googleapis.com/maps/api/js</api_url>
             </general>
         </storelocator>
