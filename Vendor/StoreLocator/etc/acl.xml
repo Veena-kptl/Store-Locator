@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                    <resource id="Vendor_StoreLocator::module" title="Store Locator" translate="title" sortOrder="90">
+                        <resource id="Vendor_StoreLocator::admin_store_list" title="View stores" translate="title" sortOrder="10"/>
+                        <resource id="Vendor_StoreLocator::admin_store_delete" title="Delete stores" translate="title" sortOrder="11"/>
+                        <resource id="Vendor_StoreLocator::admin_store_activate" title="Activate stores" translate="title" sortOrder="12"/>
+                        <resource id="Vendor_StoreLocator::admin_store_deactivate" title="Deactivate stores" translate="title" sortOrder="13"/>
+                        <resource id="Vendor_StoreLocator::admin_store_edit" title="Edit stores" translate="title" sortOrder="14"/>
+						<resource id="Vendor_StoreLocator::admin_store_new" title="Create stores" translate="title" sortOrder="14"/>
+                    </resource>
+					<resource id="Vendor_StoreLocator::stores" title="Store Rest Api" translate="title" sortOrder="110">
+						<resource id="Vendor_StoreLocator::store_get" title="Get Store" translate="title" sortOrder="10" />
+						<resource id="Vendor_StoreLocator::store_save" title="Save Store" translate="title" sortOrder="20" />
+						<resource id="Vendor_StoreLocator::store_delete" title="Delete Store" translate="title" sortOrder="30" />
+					</resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

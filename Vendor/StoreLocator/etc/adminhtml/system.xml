@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+
+<!--
+  ~ Copyright © 2018 Vendor. All rights reserved.
+  ~ @license GPLv3
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="vendor" translate="label" sortOrder="200">
+            <label>Vendor Extensions</label>
+        </tab>
+        <section id="storelocator" translate="label" type="text" sortOrder="400" showInDefault="1">
+            <label>Store Locator</label>
+            <tab>vendor</tab>
+            <resource>Vendor_StoreLocator::configuration</resource>
+			 <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>General</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+				<field id="api_key" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>API Key</label>
+                    <comment>
+                        <![CDATA[Google Maps API Key]]>
+                    </comment>
+					<depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="api_url" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>API URL</label>
+                    <comment>
+                        <![CDATA[Google Maps URL]]>
+                    </comment>
+					<depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+			</group>
+        </section>
+    </system>
+</config>

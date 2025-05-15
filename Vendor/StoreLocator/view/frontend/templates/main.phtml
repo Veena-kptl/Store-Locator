@@ -1,0 +1,141 @@
+<?php /** @var \Vendor\StoreLocator\Block\StoreList $block */?>
+<?php $_store = $block->getCurrentStore();?>
+<?php $data = $block->getStoresForFrontend(); ?>
+<?php $countryList = $block->getCountries(); ?>
+<?php $modulePath = "Vendor_StoreLocator/stockist/image/"; ?>
+
+<?php
+if($block->getMapPin()){
+
+    $mapPin = $block->getMediaUrl()."Vendor_StoreLocator/".$block->getMapPin();
+
+} else {
+
+    $mapPin = $block->getViewFileUrl('Vendor_StoreLocator::images/map_pin.png');
+
+}
+?>
+
+    <div class="parent-stockists">
+
+        <div class="directions-panel">
+            <p>Your directions: </p>
+            <p class="change-directions">Change to <span class="walking get-directions" data-directions="WALKING">walking, </span><span class="cycle get-directions" data-directions="BICYCLING">cycling</span>, <span class="transit get-directions" data-directions="TRANSIT">public transport</span> or <span class="driving get-directions" data-directions="DRIVING">driving</span>.</p>
+            <div class="close"></div>
+        </div>
+        <div class="search-stockists">
+
+            <div class="search-header">
+
+                <p class="search-title"><?php /* @escapeNotVerified */ echo __("Find a Store") ?>
+                    <span class="geocode-location"></span>
+                </p>
+                <p class="stockists-intro"><?php /* @escapeNotVerified */ echo __("Enter a city, country or full post/zip code") ?></p>
+                <select id="stockist-search-term" placeholder="Search">
+					<?php foreach($countryList as $country)
+						{
+								echo  "<option value='".$country['value']."'>".$country['label']."</option>";
+						}
+					?>
+				</select>
+                <button id="storelocator-submit"><?php /* @escapeNotVerified */ echo __("Search") ?></button>
+
+            </div>
+
+            <div class="storelocator-results">
+
+
+                <div class="results-store">
+
+                    <?php foreach ($data as $item): ?>
+
+                        <?php $data_marker = $item["latitude"].$item["longitude"]; ?>
+
+                        <div class="results-content loaded-results" data-marker="<?php echo $block->escapeHtml($data_marker); ?>">
+
+                            <?php if ($item["image"]): ?>
+
+                                <div class="image">
+                                    <img src="<?php echo $block->getBaseImageUrl().$modulePath.$block->escapeHtml($item["image"]) ?>"
+                                        alt="<?php echo $block->escapeHtml($item["name"]) ?>" />
+                                </div>
+
+                            <?php endif; ?>
+
+                            <div class="results-item-data">
+
+                                <p class="results-title"><a href = "<?php echo $block->getUrl("storelist/view/index")."store_id/".$item['store_id']; ?>"><?php echo $block->escapeHtml($item["name"]); ?></a></p>
+
+                                <?php if ($item["address"]): ?>
+                                    <p class="results-address"><?php echo $block->escapeHtml($item["address"]); ?></p>
+                                <?php endif; ?>
+
+
+                                <?php if ($item["country"] && $countryList[$item["country"]]): ?>
+                                    <p class="results-miles"><?php echo $block->escapeHtml($countryList[$item["country"]]) ?></p>
+                                <?php endif; ?>
+
+                            </div>
+
+                        </div>
+
+                    <?php endforeach; ?>
+
+                </div>
+
+            </div>
+
+        </div>
+		
+		<div id="map-canvas" style="height: 100%; width: 100%;"></div>
+
+    </div>
+
+	
+	<script type="text/x-magento-init">
+    {
+        "*": {
+
+            "storelocator_storelist": {
+                "moduleUrl" : "<?php echo $block->getModuleUrlSettings() ?>",
+                "map_styles" : "<?php echo 'default' ?>",
+                "map_pin" : "<?php echo $mapPin; ?>",
+                "geolocation" : <?php echo '1'; ?>,
+                "zoom" : <?php echo '13'; ?>,
+                "latitude" : <?php echo '51.4935057'; ?>,
+                "longitude" : <?php echo '-0.1506621'; ?>,
+                "radius" : <?php echo '40233.6'; ?>,
+                "template" : "<?php echo 'full_width_sidebar'; ?>",
+                "apiKey" : "<?php echo $block->getGoogleApiKey(); ?>",
+                "unit" : "<?php echo 'default' ?>",
+                "fillColor" : "<?php echo '00FFFF'; ?>",
+                "fillOpacity" : <?php echo '0.2'; ?>,
+                "strokeColor" : "<?php echo '0000A0'; ?>",
+                "strokeOpacity" : <?php echo '0.5'; ?>,
+                "strokeWeight" : <?php echo '1'; ?>
+            }
+
+        }
+    }
+</script>
+<script type="text/javascript">
+    require(["jquery"],function($) {
+        $("#storelocator-submit").click(function() {
+            var customurl = "<?php echo $this->getUrl().'storelist/index/listView'?>";
+            $.ajax({
+                url: customurl,
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    country_id: $("#stockist-search-term").val(),
+                },
+            success: function(response) {             
+               $(".storelocator-results").html(response.html);
+                },
+                error: function (xhr, status, errorThrown) {
+                    console.log('Error happens. Try again.');
+                }
+            });
+        });
+    });
+</script>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/storelist/getStore/:id" method="GET">
+        <service class="Vendor\StoreLocator\Api\StoreRepositoryInterface" method="get" />
+        <resources>
+            <resource ref="Vendor_StoreLocator::store_get" />
+        </resources>
+    </route>
+    <route url="/V1/storelist/save" method="PUT">
+        <service class="Vendor\StoreLocator\Api\StoreRepositoryInterface" method="save" />
+        <resources>
+            <resource ref="Vendor_StoreLocator::store_save" />
+        </resources>
+    </route>
+	<route url="/V1/storelist/getList" method="GET">
+        <service class="Vendor\StoreLocator\Api\StoreRepositoryInterface" method="getList" />
+        <resources>
+            <resource ref="Vendor_StoreLocator::store_get" />
+        </resources>
+    </route>
+	<route url="/V1/storelist/delete" method="POST">
+        <service class="Vendor\StoreLocator\Api\StoreRepositoryInterface" method="delete" />
+        <resources>
+            <resource ref="Vendor_StoreLocator::store_delete" />
+        </resources>
+    </route>
+</routes>

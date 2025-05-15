@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<!--
+  ~ Copyright © 2018 Vendor. All rights reserved.
+  ~ @license GPLv3
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Vendor_StoreLocator" setup_version="1.0.0" />
+</config>

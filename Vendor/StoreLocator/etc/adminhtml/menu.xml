@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<!--
+  ~ Copyright © 2018 Vendor. All rights reserved.
+  ~ @license GPLv3
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Vendor_StoreLocator::storelocator" title="Locator" module="Vendor_StoreLocator" sortOrder="50" parent="Magento_Backend::stores" resource="Vendor_StoreLocator::storelocator" />
+        <add id="Vendor_StoreLocator::configuration" title="Configuration" module="Vendor_StoreLocator" sortOrder="10" parent="Vendor_StoreLocator::storelocator" action="adminhtml/system_config/edit/section/storelocator" resource="Vendor_StoreLocator::configuration" />
+        <add id="Vendor_StoreLocator::stores_list" title="All Stores" module="Vendor_StoreLocator" sortOrder="30" parent="Vendor_StoreLocator::storelocator" action="storelocator/stores" resource="Vendor_StoreLocator::stores" />
+    </menu>
+</config>

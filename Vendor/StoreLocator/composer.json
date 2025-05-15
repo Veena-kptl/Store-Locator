@@ -1,0 +1,20 @@
+{
+    "name": "vendor/module-storelocator",
+    "description": "Store Locator Module",
+    "require": {
+        "magento/framework": ">100.0"
+    },
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "GPLv3"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Vendor\\StoreLocator\\": ""
+        }
+    }
+}

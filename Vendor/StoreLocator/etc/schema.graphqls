@@ -1,0 +1,33 @@
+type Query {
+  storeLocatorStores(
+    country: String @doc(description: "Filter stores by country code.")
+    pageSize: Int @doc(description: "Number of stores to return per page.")
+    currentPage: Int @doc(description: "Current page number for pagination.")
+  ): StoreLocatorStoreResult @resolver(class: "\\Vendor\\StoreLocator\\Model\\Resolver\\StoreLocatorStores") @cache(maxAge: 3600)
+}
+
+type StoreLocatorStoreResult {
+  items: [StoreInfo] @doc(description: "List of stores.")
+  total_count: Int @doc(description: "Total number of stores matching the criteria.")
+  page_info: PaginationInfo @doc(description: "Pagination information.")
+}
+
+type StoreInfo {
+  store_id: Int @doc(description: "Store ID.")
+  name: String @doc(description: "Name of the store.")
+  address: String @doc(description: "Full address of the store.")
+  city: String @doc(description: "City of the store.")
+  region: String @doc(description: "Region/State of the store.")
+  country_id: String @doc(description: "Country code of the store.")
+  latitude: Float @doc(description: "Latitude of the store's location.")
+  longitude: Float @doc(description: "Longitude of the store's location.")
+  phone: String @doc(description: "Phone number of the store.")
+  # Add other relevant store attributes here
+}
+
+
+type PaginationInfo {
+  current_page: Int @doc(description: "Current page number.")
+  page_size: Int @doc(description: "Number of items per page.")
+  total_pages: Int @doc(description: "Total number of pages.")
+}

@@ -1,0 +1,112 @@
+<?php
+/** @var Vendor\StoreLocator\Block\Widget\Store $block */
+$country_id = $this->getData('country_id');
+$size = $this->getData('max_items');
+$storeList = $block->getStores($country_id,$size);
+if(count($storeList) >0 && $block->getModuleConfig())
+{
+	?>
+	<div class="stockists-results">
+
+	<div class="page-title title">
+		<h2>Location Widget</h2>
+	</div>
+
+                <div class="results-store">
+
+                    <?php foreach ($storeList as $item): ?>
+
+                        <?php $data_marker = $item["latitude"].$item["longitude"]; ?>
+
+                        <div class="results-content loaded-results" data-marker="<?php echo $block->escapeHtml($data_marker); ?>">
+
+                            <div class="results-item-data">
+
+                                <p class="results-title"><?php echo $block->escapeHtml($item["name"]); ?></p>
+
+                                <?php if ($item["address"]): ?>
+                                    <p class="results-address"><?php echo $block->escapeHtml($item["address"]); ?></p>
+                                <?php endif; ?>
+
+
+                                <?php if ($item["country_id"]): ?>
+                                    <p class="results-miles"><?php echo $block->escapeHtml($item["country_id"]) ?></p>
+                                <?php endif; ?>
+
+                            </div>
+
+                        </div>
+
+                    <?php endforeach; ?>
+
+                </div>
+
+        </div>
+	<?php 
+}
+else
+{
+?>
+ <div class="results-store">COMING SOON</div>
+<?php	
+}
+?>
+<style>
+.results-content.loaded-results {width: auto;background-color: #fff;color: #000;padding: 8px 12px;border-left: 4px solid #4CAF50;word-wrap: break-word;}
+
+.results-item-data {
+    border: 1px solid #ccc !important;
+    margin-top: 16px !important;
+    margin-bottom: 16px !important;
+    font-size: 15px;
+    padding: 10px;
+}
+
+p.results-title {
+    font-weight: bold;
+}
+
+.page-title.title {
+    font-size: 20px;
+    margin: 10px;
+    border-bottom: 1px solid grey;
+}
+/* search sidebar specific */
+.search-stockists.close-up {
+    height: 250px;
+}
+.search-stockists .search-title {
+    font-size: 24px;
+    margin-bottom: 19px;
+    font-family: "Times New Roman", Times, serif;
+    color: #081c2a;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.search-stockists p {
+    font-size: 15px;
+    font-family: "Times New Roman", Times, serif;
+    margin-bottom: 0;
+}
+.search-stockists .search-header p {
+    margin-bottom: 12px;
+}
+.search-stockists .results-title {
+    color: #081c2a;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.3px;
+}
+.search-stockists .stockists-results {
+    overflow-y: scroll;
+    height: 315px;
+    margin-top: 15px;
+}
+.stockists-results .image,
+.stockists-results .results-item-data{
+	display: inline-block;
+}
+</style>

@@ -1,0 +1,81 @@
+<?php
+declare(strict_types=1);
+?>
+<?php /** @var \Limesharp\Stockists\Block\Stockists $block */ ?>
+<?php $data = $block->getStoresForFrontend(); ?>
+<?php $countryList = $block->getCountries(); ?>
+<?php $modulePath = "limesharp_stockists/stockist/image/"; ?>
+<?php $templateSetting = $block->getTemplateSettings(); ?>
+<?php $storeDetails = $this->getDetails(); ?>
+<?php
+$scriptUrl = "https://maps.googleapis.com/maps/api/js?v=3&sensor=false&key=".$block->getGoogleApiKey()."&callback=initMap";
+if($block->getMapPin()){
+
+    $mapPin = $block->getMediaUrl()."limesharp_stockists/".$block->getMapPin();
+
+} else {
+
+    $mapPin = $block->getViewFileUrl('Limesharp_Stockists::images/map_pin.png');
+
+}
+?>
+<div class="page-title">
+		<div class="title">
+            <p><?php echo $block->escapeHtml(__("Store Details")) ?></p>
+        </div>
+        <div class="border"></div>
+	</div>
+<div class="individual-stockists">
+	
+    <div class="details">
+        
+        <div class="address">
+			 <?php if($storeDetails["name"]): ?>
+        <div class="intro">
+            <p class="intro">
+                <?php echo $block->escapeHtml(__($storeDetails["name"])); ?>
+            </p>
+        </div>
+        <?php endif; ?>
+            <div class="exact-address">
+                <p class="address-title"><?php echo $block->escapeHtml(__("Address")) ?></p>
+                <p><?php echo $block->escapeHtml($storeDetails["address"]) ?></p>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="get-directions">
+            <a href="http://maps.google.com/maps?saddr=&daddr=<?php echo $block->escapeHtml($storeDetails["latitude"]).",".$block->escapeHtml($storeDetails["longitude"]); ?>" target="_blank">
+                <?php echo $block->escapeHtml(__("Get Directions")) ?>
+            </a>
+        </div>
+        <div id="map-canvas-individual"></div>
+       
+
+</div>
+<div class="clearfix"></div>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+
+            "storelocator_individual_stores": {
+                "map_styles" : "<?php echo 'default' ?>",
+                "map_pin" : "<?php echo $mapPin; ?>",
+                "geolocation" : <?php echo '1'; ?>,
+                "modulePath" : "<?php echo $block->getBaseImageUrl().$modulePath; ?>",
+                "zoom_individual" : <?php echo '13'; ?>,
+                "storeDetails" : <?php echo json_encode($storeDetails) ?>,
+                "radius" : <?php echo '40233.6'; ?>,
+                "template" : "<?php echo 'full_width_sidebar'; ?>",
+                "apiKey" : "<?php echo $block->getGoogleApiKey(); ?>",
+                "unit" : "<?php echo 'default' ?>",
+                "fillColor" : "<?php echo '00FFFF'; ?>",
+                "fillOpacity" : <?php echo '0.2'; ?>,
+                "strokeColor" : "<?php echo '0000A0'; ?>",
+                "strokeOpacity" : <?php echo '0.5'; ?>,
+                "strokeWeight" : <?php echo '1'; ?>
+            }
+
+        }
+    }
+</script>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>Stockists</title>
+        <css src="Vendor_StoreLocator::css/storelist.css"/>
+    </head>
+    <body>
+        <referenceBlock name="page.main.title" remove="true" />
+        <attribute name="class" value="storelist"/>
+        <referenceContainer name="content">
+            <block class="Vendor\StoreLocator\Block\StoreList" name="storelist.stores.individual" ifconfig="storelocator/general/enabled" template="Vendor_StoreLocator::individualStore.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

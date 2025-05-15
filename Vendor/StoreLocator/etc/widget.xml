@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget class="Vendor\StoreLocator\Block\Widget\Store" id="nans_store_locator_map">
+        <label>Store Locations</label>
+        <description>Store Locations</description>
+        <parameters>
+            <parameter name="country_id" sort_order="10" visible="true" xsi:type="select" source_model="Magento\Directory\Model\Config\Source\Country" required="true">
+                <label>Country</label>
+            </parameter>
+            <parameter name="max_items" sort_order="20" visible="true" xsi:type="text" required="true">
+                <label>Max Items</label>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>
